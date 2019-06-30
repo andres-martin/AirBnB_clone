@@ -4,7 +4,7 @@
 import json
 import uuid
 from datetime import datetime
-# from models import file_storage
+import models
 
 
 class BaseModel:
@@ -12,7 +12,6 @@ class BaseModel:
     # uniq_id = uuid.uuid4()
     def __init__(self, *args, **kwargs):
         ''' variables '''
-        from models import storage
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
@@ -23,7 +22,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         ''' str representation '''
@@ -32,9 +31,8 @@ class BaseModel:
 
     def save(self):
         ''' updates the public instance attribute updated_at '''
-        from models import storage
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         ''' returns a dictionary with all keys/values

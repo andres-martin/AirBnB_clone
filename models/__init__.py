@@ -3,5 +3,9 @@
 
 
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
-clases = {"BaseModel": BaseModel}
+
+storage = FileStorage()
+storage.reload()
+clases = {"BaseModel": BaseModel, "FileStorage": FileStorage}

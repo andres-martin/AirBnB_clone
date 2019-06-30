@@ -26,7 +26,7 @@ class FileStorage:
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as fn:
             # fn.write(json.dumps(self.__objects))
             d_objs = FileStorage.__objects
-            d_tmp = {k : o.to_dict() for k, o in d_objs.items()}
+            d_tmp = {k: o.to_dict() for k, o in d_objs.items()}
             # d_objs.update(d_tmp)
             FileStorage.__objects.update(d_tmp)
             json.dump(FileStorage.__objects, fn)
@@ -38,6 +38,9 @@ class FileStorage:
             no exception should be raised) '''
         try:
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as fn:
-                json.load(fn)
+                dictmp = json.load(fn)
+                dictmp = {k: BaseModel(**o) for k, o in dictmp.items()}
+                # dictmp = map(lambda k: (k[0], f(k[1])), dictmp.items())
+                FileStorage.__objects = dictmp
         except FileNotFoundError:
             pass

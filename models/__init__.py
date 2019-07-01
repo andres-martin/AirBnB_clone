@@ -7,6 +7,8 @@ from models.user import User
 from models.engine.file_storage import FileStorage
 
 
-clases = {"BaseModel": BaseModel, "FileStorage": FileStorage, "User": User}
+clases = {"BaseModel": BaseModel, "FileStorage": FileStorage,
+          "User": User, "State": State, "City": City, "Amenity": Amenity,
+          "Place": Place, "Review": Review}
 storage = FileStorage()
 storage.reload()

@@ -87,5 +87,23 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    def do_all(self, args):
+        """ Prints all string representation of all instances """
+        argumentos = args.split(" ")
+        objetos = storage.all()
+        instancias = []
+        if len(args) == 0:
+            for name in objetos:
+                instancias.append(objetos[name])
+            print(instancias)
+            return
+        if (argumentos[0] in self.up_clases):
+            for name in objetos:
+                if name[0:len(argumentos[0])] == argumentos[0]:
+                    instancias.append(objetos[name])
+            print(instancias)
+        else:
+            print("** class doesn't exist **")
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

@@ -4,7 +4,13 @@ from .base_model import BaseModel
 
 
 class User(BaseModel):
-    ''' class User for user model '''
+    ''' class User for user model
+    Args:
+        email (str): empty string
+        password (str): empty string
+        first_name (str): empty string
+        last_name (str): empty string
+    '''
     email = ""
     password = ""
     first_name = ""

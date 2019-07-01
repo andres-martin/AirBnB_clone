@@ -136,12 +136,32 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    def count(self, args):
+        """ Retrieve the number of instances
+            of a class: <class name>.count()
+        """
+        argumentos = args.split(" ")
+        objetos = storage.all()
+        instancias = []
+        if len(args) == 0:
+            for name in objetos:
+                instancias.append(objetos[name])
+            print(len(instancias))
+        if (argumentos[0] in self.up_clases):
+            for name in objetos:
+                if name[0:len(argumentos[0])] == argumentos[0]:
+                    instancias.append(objetos[name])
+            print(len(instancias))
+
     def default(self, inp):
         ''' shorthand methods '''
         try:
             tokens = inp.split('.')
-            if tokens[0] in self.up_clases and tokens[1] == 'all()':
-                return self.do_all(tokens[0])
+            if tokens[0] in self.up_clases:
+                if tokens[1] == 'all()':
+                    return self.do_all(tokens[0])
+                elif tokens[1] == 'count()':
+                    return self.count(tokens[0])
         except Exception:
             pass
 

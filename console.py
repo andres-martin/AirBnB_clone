@@ -5,7 +5,7 @@
 import cmd
 from models import clases, storage
 from models.base_model import BaseModel
-
+from datetime import datetime
 
 class HBNBCommand(cmd.Cmd):
     """ interpreter of commands"""
@@ -102,6 +102,36 @@ class HBNBCommand(cmd.Cmd):
                 if name[0:len(argumentos[0])] == argumentos[0]:
                     instancias.append(objetos[name])
             print(instancias)
+        else:
+            print("** class doesn't exist **")
+
+    def do_update(self, args):
+        """ pdates an instance based on the class name and id """
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        argumentos = args.split(" ")
+        objetos = storage.all()
+        if (argumentos[0] in self.up_clases):
+            if len(argumentos) < 2:
+                print("** instance id missing **")
+                return
+            llave = argumentos[0]+"."+argumentos[1]
+            if llave in objetos:
+                obj = objetos[llave]
+                notocar = ["id", "created_at", "updated_at"]
+                if obj:
+                    argumento = args.split(" ")
+                    if len(argumento) < 3:
+                        print("** attribute name missing **")
+                    elif len(argumento) < 4:
+                        print("** value missing **")
+                    elif argumento[2] not in notocar:
+                        obj.__dict__[argumento[2]] = argumento[3]
+                        obj.updated_at = datetime.now()
+                        storage.save()
+            else:
+                print("** no instance found **")
         else:
             print("** class doesn't exist **")
 

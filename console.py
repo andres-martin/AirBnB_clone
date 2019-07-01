@@ -136,5 +136,14 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    def default(self, inp):
+        ''' shorthand methods '''
+        try:
+            tokens = inp.split('.')
+            if tokens[0] in self.up_clases and tokens[1] == 'all()':
+                return self.do_all(tokens[0])
+        except Exception:
+            pass
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

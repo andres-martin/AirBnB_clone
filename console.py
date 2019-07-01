@@ -162,13 +162,12 @@ class HBNBCommand(cmd.Cmd):
     def default(self, inp):
         ''' shorthand methods '''
         try:
+            methods = {'all()': self.do_all, 'count()': self.count}
             tokens = inp.split('.')
             if tokens[0] in self.up_clases:
-                if tokens[1] == 'all()':
-                    return self.do_all(tokens[0])
-                elif tokens[1] == 'count()':
-                    return self.count(tokens[0])
-        except Exception:
+                if tokens[1] in methods:
+                    return methods[tokens[1]](tokens[0])
+        except IndexError:
             pass
 
 if __name__ == '__main__':

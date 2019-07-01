@@ -64,5 +64,28 @@ class HBNBCommand(cmd.Cmd):
         except AttributeError:
             print("** instance id missing **")
 
+    def do_destroy(self, args):
+        """  Deletes an instance based on the class """
+        argumentos = args.split(" ")
+        objetos = storage.all()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if (argumentos[0] in self.up_clases):
+            if len(argumentos) < 2:
+                print("** instance id missing **")
+                return
+            llave = argumentos[0]+"."+argumentos[1]
+            if llave in objetos:
+                obj = objetos[llave]
+                if obj:
+                    dobj = storage.all()
+                    del dobj["{}.{}".format(type(obj).__name__, obj.id)]
+                    storage.save()
+            else:
+                print("** no instance found **")
+        else:
+            print("** class doesn't exist **")
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

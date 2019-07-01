@@ -3,7 +3,7 @@
 
 
 import cmd
-from models import clases
+from models import clases, storage
 from models.base_model import BaseModel
 
 
@@ -35,9 +35,34 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         if (argumentos[0] in self.up_clases):
-            print("existe")
+            crear = eval("{}()".format(argumentos[0]))
+            crear.save()
+            print("{}".format(crear.id))
         else:
             print("** class doesn't exist **")
+
+    def do_show(self, args):
+        """ Prints the string representation """
+        argumentos = args.split(" ")
+        objetos = storage.all()
+        try:
+            if len(args) == 0:
+                print("** class name missing **")
+                return
+            if (argumentos[0] in self.up_clases):
+                if len(argumentos) > 1:
+                    llave = argumentos[0]+"."+argumentos[1]
+                    if llave in objetos:
+                        obj = objetos[llave]
+                        print(obj)
+                    else:
+                        print("** no instance found **")
+                else:
+                    print("** instance id missing **")
+            else:
+                print("** class doesn't exist **")
+        except AttributeError:
+            print("** instance id missing **")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

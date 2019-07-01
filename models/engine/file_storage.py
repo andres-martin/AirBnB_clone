@@ -2,8 +2,7 @@
 ''' class FileStorage that serializes instances
     to a JSON file and deserializes JSON file to instances '''
 import json
-from datetime import datetime
-from models.base_model import BaseModel
+import models
 
 
 class FileStorage:
@@ -24,12 +23,11 @@ class FileStorage:
     def save(self):
         ''' serializes __objects to the JSON file (path: __file_path) '''
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as fn:
-            # fn.write(json.dumps(self.__objects))
-            d_objs = FileStorage.__objects
+            # fn.write(json.dumps(.__objects))
+            d_objs = FileStorage.__objects.copy()
             d_tmp = {k: o.to_dict() for k, o in d_objs.items()}
-            # d_objs.update(d_tmp)
-            FileStorage.__objects.update(d_tmp)
-            json.dump(FileStorage.__objects, fn)
+            d_objs.update(d_tmp)
+            json.dump(d_objs, fn)
 
     def reload(self):
         ''' deserializes the JSON file to __objects
@@ -38,9 +36,11 @@ class FileStorage:
             no exception should be raised) '''
         try:
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as fn:
-                dictmp = json.load(fn)
-                dictmp = {k: BaseModel(**o) for k, o in dictmp.items()}
-                # dictmp = map(lambda k: (k[0], f(k[1])), dictmp.items())
-                FileStorage.__objects = dictmp
+                dtmp = json.load(fn)
+                # get the key from dictmp slice it and pass it to
+                # dictionary comprehension
+                cls = models.clases
+                dtmp = {k: cls[k.split('.')[0]](**o) for k, o in dtmp.items()}
+                FileStorage.__objects = dtmp
         except FileNotFoundError:
             pass

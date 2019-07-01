@@ -9,7 +9,7 @@ from datetime import datetime
 
 class HBNBCommand(cmd.Cmd):
     """ interpreter of commands"""
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
     up_clases = clases
 
     def do_quit(self, args):

@@ -7,6 +7,7 @@ from models import clases, storage
 from models.base_model import BaseModel
 from datetime import datetime
 
+
 class HBNBCommand(cmd.Cmd):
     """ interpreter of commands"""
     prompt = '(hbnb) '
@@ -94,13 +95,13 @@ class HBNBCommand(cmd.Cmd):
         instancias = []
         if len(args) == 0:
             for name in objetos:
-                instancias.append(objetos[name])
+                instancias.append(str(objetos[name]))
             print(instancias)
             return
         if (argumentos[0] in self.up_clases):
             for name in objetos:
                 if name[0:len(argumentos[0])] == argumentos[0]:
-                    instancias.append(objetos[name])
+                    instancias.append(str(objetos[name]))
             print(instancias)
         else:
             print("** class doesn't exist **")

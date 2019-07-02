@@ -1,16 +1,10 @@
 #!/usr/bin/python3
-''' class User that inherits from BaseModel '''
+""" class User that inherits from BaseModel """
 from .base_model import BaseModel
 
 
 class User(BaseModel):
-    ''' class User for user model
-    Args:
-        email (str): empty string
-        password (str): empty string
-        first_name (str): empty string
-        last_name (str): empty string
-    '''
+    """ class User for user model """
     email = ""
     password = ""
     first_name = ""

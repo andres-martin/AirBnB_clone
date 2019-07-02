@@ -178,11 +178,13 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     args = tokens[0]
                 return methods2[key](args)
-            # elif tokens[1].split('(')[0] == 'update':
             else:
                 params = findall('\(([^)]+)', tokens[1])
-                newstr = sub(r'''[",]''', '', params[0])
-                args = tokens[0] + " " + newstr
+                args = tokens[0]
+                if params:
+                    newstr = sub(r'''[",]''', '', params[0])
+                    if newstr:
+                        args = tokens[0] + " " + newstr
                 return self.do_update(args)
         except IndexError:
             pass

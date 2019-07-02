@@ -1,17 +1,18 @@
 #!/usr/bin/python3
-''' class BaseModel that defines all
-    common attributes/methods for other classes '''
 import json
 import uuid
 from datetime import datetime
 import models
 
+""" class BaseModel that defines all
+  3     common attributes/methods for other classes """
+
 
 class BaseModel:
-    '''int common attributes '''
-    # uniq_id = uuid.uuid4()
+    """ int common attributes """
+
     def __init__(self, *args, **kwargs):
-        ''' variables '''
+        """ variables """
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
@@ -25,19 +26,19 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        ''' str representation '''
+        """ str representation """
         clsname = self.__class__.__name__
         mg = "[{}] ({}) {}"
         return mg.format(clsname, self.id, self.__dict__)
 
     def save(self):
-        ''' updates the public instance attribute updated_at '''
+        """ updates the public instance attribute updated_at """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        ''' returns a dictionary with all keys/values
-            of __dict__ of the instance '''
+        """ returns a dictionary with all keys/values
+            of __dict__ of the instance """
         custom_dic = {'__class__': self.__class__.__name__}
         created_at_iso = self.created_at.isoformat()
         updated_at_iso = self.updated_at.isoformat()

@@ -15,4 +15,4 @@ This abstraction will also allow you to change the type of storage easily withou
 
 The console will be a tool to validate this storage engine.
 
-<p><img src="https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step5.png" alt="Technology" width="629" height="335"></p>
+<p><img src="https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step0.png" alt="Console" width="629" height="335"></p>

@@ -3,6 +3,7 @@
 
 
 import cmd
+from re import findall
 from models import clases, storage
 from models.base_model import BaseModel
 from datetime import datetime
@@ -163,10 +164,23 @@ class HBNBCommand(cmd.Cmd):
         ''' shorthand methods '''
         try:
             methods = {'all()': self.do_all, 'count()': self.count}
+            methods2 = {'show': self.do_show, 'destroy': self.do_destroy}
             tokens = inp.split('.')
-            if tokens[0] in self.up_clases:
-                if tokens[1] in methods:
-                    return methods[tokens[1]](tokens[0])
+            if tokens[1] in methods:
+                return methods[tokens[1]](tokens[0])
+            elif tokens[1].split('(')[0] in methods2:
+                key = tokens[1].split('(')[0]
+                # if tokens[1][
+                # id_parm = ""
+                # id_parm = tokens[1].split('("', 1)[1].split('")')[0]
+                id_parm = findall('\(([^)]+)', tokens[1])
+                if len(id_parm) != 0:
+                    id_m = id_parm[0].split('"', 1)[1].split('"')[0]
+                    args = tokens[0] + " " + id_m
+                else:
+                    args = tokens[0]
+                # print(args)
+                return methods2[key](args)
         except IndexError:
             pass
 

@@ -1,23 +1,25 @@
 #!/usr/bin/python3
-''' class FileStorage that serializes instances
-    to a JSON file and deserializes JSON file to instances '''
+""" class FileStorage that serializes instances
+    to a JSON file and deserializes JSON file to instances """
 import json
 import models
 
 
 class FileStorage:
-    ''' private class attributes '''
+    """ private class attributes """
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        ''' returns the dictionary __objects '''
-        return FileStorage.__objects
+        """ returns the dictionary __objects """
+        return self.__objects
 
     def new(self, obj):
-        ''' sets in __objects the obj with key <obj class name>.id '''
+        """ sets in __objects the obj with key <obj class name>.id """
         clsname = obj.__class__.__name__
-        FileStorage.__objects.update({clsname + "." + obj.id: obj})
+	if obj:
+            self.__objects["{}.{}".format(clsname, obj.id)] = obj
+            # FileStorage.__objects.update({clsname + "." + obj.id: obj})
         # FileStorage.__objects.update(obj.__dict__)
 
     def save(self):

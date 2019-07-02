@@ -10,13 +10,13 @@ class Test_BaseModel(unittest.TestCase):
 
     @classmethod
     def setUpClass(clase):
-        clase.base12 = BaseModel()
-        clase.base12.name = "Holberton"
-        clase.base12.my_num = 89
+        clase.bsm = BaseModel()
+        clase.bsm.name = "Holberton"
+        clase.bsm.my_num = 89
 
     @classmethod
     def deleteClase(clase):
-        del clase.base12
+        del clase.bsm
         try:
             os.remove("file.json")
         except FileNotFoundError:
@@ -39,17 +39,17 @@ class Test_BaseModel(unittest.TestCase):
         self.assertTrue(hasattr(BaseModel, "to_dict"))
 
     def test_Init(self):
-        self.assertTrue(isinstance(self.base12, BaseModel))
+        self.assertTrue(isinstance(self.bsm, BaseModel))
 
     def test_Save(self):
-        self.base12.save()
-        self.assertNotEqual(self.base12.created_at, self.base12.updated_at)
+        self.bsm.save()
+        self.assertNotEqual(self.bsm.created_at, self.bsm.updated_at)
 
     def test_ToDict(self):
-        base12_dict = self.base12.to_dict()
-        self.assertEqual(self.base12.__class__.__name__, 'BaseModel')
-        self.assertIsInstance(base12_dict['created_at'], str)
-        self.assertIsInstance(base12_dict['updated_at'], str)
+        bsm_dict = self.bsm.to_dict()
+        self.assertEqual(self.bsm.__class__.__name__, 'BaseModel')
+        self.assertIsInstance(bsm_dict['created_at'], str)
+        self.assertIsInstance(bsm_dict['updated_at'], str)
 
 
 if __name__ == "__main__":

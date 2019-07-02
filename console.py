@@ -3,7 +3,7 @@
 
 
 import cmd
-from re import findall, sub
+from re import findall
 from models import clases, storage
 from models.base_model import BaseModel
 from datetime import datetime

@@ -7,6 +7,7 @@ from models.base_model import BaseModel
 
 
 class Test_BaseModel(unittest.TestCase):
+    """ testing BaseModel """
 
     @classmethod
     def setUpClass(clase):

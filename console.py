@@ -181,6 +181,14 @@ class HBNBCommand(cmd.Cmd):
                     args = tokens[0]
                 # print(args)
                 return methods2[key](args)
+            else:
+                params = findall('\(([^)]+)', tokens[1])
+                args = tokens[0]
+                if params:
+                    newstr = sub(r'''[",]''', '', params[0])
+                    if newstr:
+                        args = tokens[0] + " " + newstr
+                return self.do_update(args)
         except IndexError:
             pass
 

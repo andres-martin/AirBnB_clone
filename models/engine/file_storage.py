@@ -19,30 +19,22 @@ class FileStorage:
         clsname = obj.__class__.__name__
         if obj:
             self.__objects["{}.{}".format(clsname, obj.id)] = obj
-            # FileStorage.__objects.update({clsname + "." + obj.id: obj})
-        # FileStorage.__objects.update(obj.__dict__)
 
     def save(self):
-        ''' serializes __objects to the JSON file (path: __file_path) '''
-        with open(FileStorage.__file_path, 'w', encoding='utf-8') as fn:
-            # fn.write(json.dumps(.__objects))
-            d_objs = FileStorage.__objects.copy()
-            d_tmp = {k: o.to_dict() for k, o in d_objs.items()}
-            d_objs.update(d_tmp)
+        """ serializes __objects to the JSON file (path: __file_path) """
+        d_objs = {}
+        for id, objs in self.__objects.items():
+            d_objs[id] = objs.to_dict()
+        with open(self.__file_path, mode="w", encoding="UTF-8") as fn:
             json.dump(d_objs, fn)
 
     def reload(self):
-        ''' deserializes the JSON file to __objects
-            (only if the JSON file (__file_path) exists ; otherwise,
-            do nothing. If the file doesn’t exist,
-            no exception should be raised) '''
+        """ deserializes the JSON file to __objects """
         try:
-            with open(FileStorage.__file_path, 'r', encoding='utf-8') as fn:
+            with open(self.__file_path, encoding='utf-8') as fn:
                 dtmp = json.load(fn)
-                # get the key from dictmp slice it and pass it to
-                # dictionary comprehension
-                cls = models.clases
-                dtmp = {k: cls[k.split('.')[0]](**o) for k, o in dtmp.items()}
-                FileStorage.__objects = dtmp
+            for key, value in dtmp.items():
+                cls = models.clases[value["__class__"]](**value)
+                self.__objects[key] = cls
         except FileNotFoundError:
             pass

@@ -17,7 +17,7 @@ class FileStorage:
     def new(self, obj):
         """ sets in __objects the obj with key <obj class name>.id """
         clsname = obj.__class__.__name__
-	if obj:
+        if obj:
             self.__objects["{}.{}".format(clsname, obj.id)] = obj
             # FileStorage.__objects.update({clsname + "." + obj.id: obj})
         # FileStorage.__objects.update(obj.__dict__)

@@ -3,7 +3,7 @@
 
 
 import cmd
-from re import findall
+from re import findall, sub
 from models import clases, storage
 from models.base_model import BaseModel
 from datetime import datetime
@@ -170,8 +170,6 @@ class HBNBCommand(cmd.Cmd):
                 return methods[tokens[1]](tokens[0])
             elif tokens[1].split('(')[0] in methods2:
                 key = tokens[1].split('(')[0]
-                # if tokens[1][
-                # id_parm = ""
                 # id_parm = tokens[1].split('("', 1)[1].split('")')[0]
                 id_parm = findall('\(([^)]+)', tokens[1])
                 if len(id_parm) != 0:
@@ -179,7 +177,6 @@ class HBNBCommand(cmd.Cmd):
                     args = tokens[0] + " " + id_m
                 else:
                     args = tokens[0]
-                # print(args)
                 return methods2[key](args)
             else:
                 params = findall('\(([^)]+)', tokens[1])

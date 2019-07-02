@@ -7,7 +7,7 @@ from models.base_model import BaseModel
 
 
 class Test_BaseModel(unittest.TestCase):
-    
+
     @classmethod
     def setUpClass(clase):
         clase.base12 = BaseModel()

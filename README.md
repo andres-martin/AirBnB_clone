@@ -19,9 +19,9 @@ The console will be a tool to validate this storage engine.
 
 ### Usage
 
-First `git clone` this repository ...   
+First `git clone` this repository `https://github.com/alexadeveloper/AirBnB_clone` 
 
-then in your terminal, the console can be executed in two ways, in interactive mode and non-interactive mode:
+then you can run the console in your terminal, the console can be executed in two ways, in interactive mode and non-interactive mode:
 
 #### Interactive 
 

@@ -206,30 +206,30 @@ class HBNBCommand(cmd.Cmd):
                 args = tokens[0]
                 ######
                 #### feature to update from dictionary
-                id_key = tokens[1].split('"', 1)[1].split('"')[0]
-                dicparams = tokens[1].split('{', 1)[1].split('}')[0]
-                if dicparams:
-                    obj_dic = self.build_dict(dicparams)
-                    print(obj_dic)
-                    print(type(obj_dic))
-                    classes = self.up_clases
-                    objects = storage.all()
-                    if tokens[0] in classes:
-                        master_key = tokens[0]+"."+id_key
-                        if master_key in objects:
-                            obj = objects[master_key]
-                            for k, v in obj_dic.items():
-                                setattr(obj, k, v)
-                            obj.updated_at = datetime.now()
-                            storage.save()
-                ######
-
-                ####
                 if params:
                     newstr = sub(r'''["',]''', '', params[0])
                     if newstr:
                         args = tokens[0] + " " + newstr
-                # return self.do_update(args)
+                return self.do_update(args)
+                id_key = tokens[1].split('"', 1)[1].split('"')[0]
+                dicparams = tokens[1].split('{', 1)[1].split('}')[0]
+#                if dicparams:
+#                    obj_dic = self.build_dict(dicparams)
+#                    print(obj_dic)
+#                    print(type(obj_dic))
+#                    classes = self.up_clases
+#                    objects = storage.all()
+#                    if tokens[0] in classes:
+#                        master_key = tokens[0]+"."+id_key
+#                        if master_key in objects:
+#                            obj = objects[master_key]
+#                            for k, v in obj_dic.items():
+#                                setattr(obj, k, v)
+#                            obj.updated_at = datetime.now()
+#                            storage.save()
+                ######
+
+                ####
         except IndexError:
             pass
 

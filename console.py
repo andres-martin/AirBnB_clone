@@ -181,10 +181,9 @@ class HBNBCommand(cmd.Cmd):
             final_dic[kval[0]] = value
         return final_dic
 
-    def update_from_dict(self, id_key, dprm, tokens, msk):
+    def update_from_dict(self, dprm, tokens, msk, objects):
         obj_dic = self.build_dict(dprm)
         classes = self.up_clases
-        objects = storage.all()
         if tokens[0] in classes:
             if msk in objects:
                 obj = objects[msk]
@@ -220,7 +219,7 @@ class HBNBCommand(cmd.Cmd):
                         print("** no instance found **")
                     dprm = tokens[1].split('{', 1)[1].split('}')[0]
                     if dprm:
-                        self.update_from_dict(id_key, dprm, tokens, msk)
+                        self.update_from_dict(dprm, tokens, msk, objects)
                 else:
                     params = findall('\(([^)]+)', tokens[1])
                     args = tokens[0]
@@ -228,7 +227,6 @@ class HBNBCommand(cmd.Cmd):
                         newstr = sub(r'''["',]''', '', params[0])
                         if newstr:
                             args = tokens[0] + " " + newstr
-                # print(args)
                     return self.do_update(args)
         except IndexError:
             pass

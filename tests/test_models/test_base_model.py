@@ -4,6 +4,8 @@ import unittest
 import os
 import pep8
 from models.base_model import BaseModel
+from models import storage
+from models.engine.file_storage import FileStorage
 
 
 class Test_BaseModel(unittest.TestCase):
@@ -50,6 +52,15 @@ class Test_BaseModel(unittest.TestCase):
     def test_Save(self):
         self.bsm.save()
         self.assertNotEqual(self.bsm.created_at, self.bsm.updated_at)
+        gasparin = BaseModel()
+        new_id = gasparin.id
+        gasparin.name = "Devon"
+        gasparin.save()
+        storage.reload()
+        my_objs = storage.all()["BaseModel.{}".format(new_id)]
+        self.assertTrue(hasattr(my_objs, "name"))
+        self.assertTrue(my_objs.name == "Devon")
+        self.assertTrue(os.path.exists('file.json'))
 
     def test_ToDict(self):
         bsm_dict = self.bsm.to_dict()

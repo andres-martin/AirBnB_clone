@@ -167,6 +167,24 @@ class HBNBCommand(cmd.Cmd):
                     instancias.append(objetos[name])
             print(len(instancias))
 
+    def build_dict(self,id_key, dicparams):
+        dicparams = dicparams.replace(" ", "").replace("'", "")
+        dicparams = dicparams.replace('"', '')
+        listd = dicparams.split(',')
+        final_dic = {}
+        for i in listd:
+            kval = i.split(':')
+            value = kval[1]
+            if value.isdigit():
+                value = int(value)
+            elif value.replace('.', '', 1).isdigit():
+                value = float(value)
+            final_dic[kval[0]] = value
+        final_dic['id'] = id_key
+        print(final_dic)
+        print(type(final_dic))
+        return final_dic
+
     def default(self, inp):
         ''' shorthand methods '''
         try:
@@ -188,22 +206,14 @@ class HBNBCommand(cmd.Cmd):
             elif tokens[1].split('(')[0] == 'update':
                 params = findall('\(([^)]+)', tokens[1])
                 args = tokens[0]
+                ######
                 #### feature to update from dictionary
+                id_key = tokens[1].split('"', 1)[1].split('"')[0]
                 dicparams = tokens[1].split('{', 1)[1].split('}')[0]
-                dicparams = dicparams.replace(" ", "").replace("'", "")
-                dicparams = dicparams.replace('"', '')
-                listd = dicparams.split(',')
-                final_dic = {}
-                for i in listd:
-                    kval = i.split(':')
-                    value = kval[1]
-                    if value.isdigit():
-                        value = int(value)
-                    elif value.replace('.', '', 1).isdigit():
-                        value = float(value)
-                    final_dic[kval[0]] = value
-                print(final_dic)
-                print(type(final_dic))
+                if dicparams:
+                    print(id_key)
+                    return self.build_dict(id_key, dicparams)
+                ######
 
                 ####
                 if params:

@@ -135,7 +135,12 @@ class HBNBCommand(cmd.Cmd):
                     elif len(argumento) < 4:
                         print("** value missing **")
                     elif argumento[2] not in notocar:
-                        obj.__dict__[argumento[2]] = argumento[3]
+                        arg3 = argumento[3]
+                        if arg3.isdigit():
+                            arg3 = int(arg3)
+                        elif arg3.replace('.', '', 1).isdigit():
+                            arg3 = float(arg3)
+                        obj.__dict__[argumento[2]] = arg3
                         obj.updated_at = datetime.now()
                         storage.save()
             else:
@@ -165,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             methods = {'all()': self.do_all, 'count()': self.count}
             methods2 = {'show': self.do_show, 'destroy': self.do_destroy}
-            tokens = inp.split('.')
+            tokens = inp.split('.', 1)
             if tokens[1] in methods:
                 return methods[tokens[1]](tokens[0])
             elif tokens[1].split('(')[0] in methods2:

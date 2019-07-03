@@ -166,10 +166,10 @@ class HBNBCommand(cmd.Cmd):
                     instancias.append(objetos[name])
             print(len(instancias))
 
-    def build_dict(self, dicparams):
-        dicparams = dicparams.replace(" ", "").replace("'", "")
-        dicparams = dicparams.replace('"', '')
-        listd = dicparams.split(',')
+    def build_dict(self, dprm):
+        dprm = dprm.replace(" ", "").replace("'", "")
+        dprm = dprm.replace('"', '')
+        listd = dprm.split(',')
         final_dic = {}
         for i in listd:
             kval = i.split(':')
@@ -179,8 +179,19 @@ class HBNBCommand(cmd.Cmd):
             elif value.replace('.', '', 1).isdigit():
                 value = float(value)
             final_dic[kval[0]] = value
-        # final_dic['id'] = id_key
         return final_dic
+
+    def update_from_dict(self, id_key, dprm, tokens, msk):
+        obj_dic = self.build_dict(dprm)
+        classes = self.up_clases
+        objects = storage.all()
+        if tokens[0] in classes:
+            if msk in objects:
+                obj = objects[msk]
+                for k, v in obj_dic.items():
+                    setattr(obj, k, v)
+                obj.updated_at = datetime.now()
+                storage.save()
 
     def default(self, inp):
         ''' shorthand methods '''
@@ -202,26 +213,14 @@ class HBNBCommand(cmd.Cmd):
                 return methods2[key](args)
             elif tokens[1].split('(')[0] == 'update':
                 if "{" in tokens[1]:
-                ######
-                #### feature to update from dictionary
                     id_key = tokens[1].split('"', 1)[1].split('"')[0]
-                    dicparams = tokens[1].split('{', 1)[1].split('}')[0]
-                    if dicparams:
-                        obj_dic = self.build_dict(dicparams)
-                        print(obj_dic)
-                        print(type(obj_dic))
-                        classes = self.up_clases
-                        objects = storage.all()
-                        if tokens[0] in classes:
-                            master_key = tokens[0]+"."+id_key
-                            if master_key in objects:
-                                obj = objects[master_key]
-                                for k, v in obj_dic.items():
-                                    setattr(obj, k, v)
-                                obj.updated_at = datetime.now()
-                                storage.save()
-
-                ############
+                    objects = storage.all()
+                    msk = tokens[0]+"."+id_key
+                    if msk not in objects:
+                        print("** no instance found **")
+                    dprm = tokens[1].split('{', 1)[1].split('}')[0]
+                    if dprm:
+                        self.update_from_dict(id_key, dprm, tokens, msk)
                 else:
                     params = findall('\(([^)]+)', tokens[1])
                     args = tokens[0]

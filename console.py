@@ -26,6 +26,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, args):
         """ EOF command """
+        print()
         quit()
 
     def do_help(self, args):
@@ -114,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, args):
-        """ pdates an instance based on the class name and id """
+        """ updates an instance based on the class name and id """
         if len(args) == 0:
             print("** class name missing **")
             return
@@ -165,6 +166,32 @@ class HBNBCommand(cmd.Cmd):
                     instancias.append(objetos[name])
             print(len(instancias))
 
+    def build_dict(self, dprm):
+        dprm = dprm.replace(" ", "").replace("'", "")
+        dprm = dprm.replace('"', '')
+        listd = dprm.split(',')
+        final_dic = {}
+        for i in listd:
+            kval = i.split(':')
+            value = kval[1]
+            if value.isdigit():
+                value = int(value)
+            elif value.replace('.', '', 1).isdigit():
+                value = float(value)
+            final_dic[kval[0]] = value
+        return final_dic
+
+    def update_from_dict(self, dprm, tokens, msk, objects):
+        obj_dic = self.build_dict(dprm)
+        classes = self.up_clases
+        if tokens[0] in classes:
+            if msk in objects:
+                obj = objects[msk]
+                for k, v in obj_dic.items():
+                    setattr(obj, k, v)
+                obj.updated_at = datetime.now()
+                storage.save()
+
     def default(self, inp):
         ''' shorthand methods '''
         try:
@@ -184,13 +211,23 @@ class HBNBCommand(cmd.Cmd):
                     args = tokens[0]
                 return methods2[key](args)
             elif tokens[1].split('(')[0] == 'update':
-                params = findall('\(([^)]+)', tokens[1])
-                args = tokens[0]
-                if params:
-                    newstr = sub(r'''["'{}:,]''', '', params[0])
-                    if newstr:
-                        args = tokens[0] + " " + newstr
-                return self.do_update(args)
+                if "{" in tokens[1]:
+                    id_key = tokens[1].split('"', 1)[1].split('"')[0]
+                    objects = storage.all()
+                    msk = tokens[0]+"."+id_key
+                    if msk not in objects:
+                        print("** no instance found **")
+                    dprm = tokens[1].split('{', 1)[1].split('}')[0]
+                    if dprm:
+                        self.update_from_dict(dprm, tokens, msk, objects)
+                else:
+                    params = findall('\(([^)]+)', tokens[1])
+                    args = tokens[0]
+                    if params:
+                        newstr = sub(r'''["',]''', '', params[0])
+                        if newstr:
+                            args = tokens[0] + " " + newstr
+                    return self.do_update(args)
         except IndexError:
             pass
 

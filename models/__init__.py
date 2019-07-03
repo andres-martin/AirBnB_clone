@@ -19,5 +19,6 @@ clases = {"BaseModel": BaseModel,
           "Amenity": Amenity,
           "Place": Place,
           "Review": Review}
+
 storage = file_storage.FileStorage()
 storage.reload()

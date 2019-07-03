@@ -43,11 +43,11 @@ class Test_FileStorage(unittest.TestCase):
 
     def test_All(self):
         """ test all """
-        storage = file_storage.FileStorage()
-        instances_dic = storage.all()
+        astorage = file_storage.FileStorage()
+        instances_dic = astorage.all()
         self.assertIsNotNone(instances_dic)
         self.assertEqual(type(instances_dic), dict)
-        self.assertIs(instances_dic, storage._FileStorage__objects)
+        self.assertIs(instances_dic, astorage._FileStorage__objects)
 
     def test_New(self):
         """ test new """

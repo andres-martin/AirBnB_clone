@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, args):
-        """ pdates an instance based on the class name and id """
+        """ updates an instance based on the class name and id """
         if len(args) == 0:
             print("** class name missing **")
             return
@@ -137,7 +137,6 @@ class HBNBCommand(cmd.Cmd):
                         print("** value missing **")
                     elif argumento[2] not in notocar:
                         arg3 = argumento[3]
-                        print("arg3: %s" % arg3)
                         if arg3.isdigit():
                             arg3 = int(arg3)
                         elif arg3.replace('.', '', 1).isdigit():
@@ -202,34 +201,36 @@ class HBNBCommand(cmd.Cmd):
                     args = tokens[0]
                 return methods2[key](args)
             elif tokens[1].split('(')[0] == 'update':
-                params = findall('\(([^)]+)', tokens[1])
-                args = tokens[0]
+                if "{" in tokens[1]:
                 ######
                 #### feature to update from dictionary
-                if params:
-                    newstr = sub(r'''["',]''', '', params[0])
-                    if newstr:
-                        args = tokens[0] + " " + newstr
-                return self.do_update(args)
-                id_key = tokens[1].split('"', 1)[1].split('"')[0]
-                dicparams = tokens[1].split('{', 1)[1].split('}')[0]
-#                if dicparams:
-#                    obj_dic = self.build_dict(dicparams)
-#                    print(obj_dic)
-#                    print(type(obj_dic))
-#                    classes = self.up_clases
-#                    objects = storage.all()
-#                    if tokens[0] in classes:
-#                        master_key = tokens[0]+"."+id_key
-#                        if master_key in objects:
-#                            obj = objects[master_key]
-#                            for k, v in obj_dic.items():
-#                                setattr(obj, k, v)
-#                            obj.updated_at = datetime.now()
-#                            storage.save()
-                ######
+                    id_key = tokens[1].split('"', 1)[1].split('"')[0]
+                    dicparams = tokens[1].split('{', 1)[1].split('}')[0]
+                    if dicparams:
+                        obj_dic = self.build_dict(dicparams)
+                        print(obj_dic)
+                        print(type(obj_dic))
+                        classes = self.up_clases
+                        objects = storage.all()
+                        if tokens[0] in classes:
+                            master_key = tokens[0]+"."+id_key
+                            if master_key in objects:
+                                obj = objects[master_key]
+                                for k, v in obj_dic.items():
+                                    setattr(obj, k, v)
+                                obj.updated_at = datetime.now()
+                                storage.save()
 
-                ####
+                ############
+                else:
+                    params = findall('\(([^)]+)', tokens[1])
+                    args = tokens[0]
+                    if params:
+                        newstr = sub(r'''["',]''', '', params[0])
+                        if newstr:
+                            args = tokens[0] + " " + newstr
+                # print(args)
+                    return self.do_update(args)
         except IndexError:
             pass
 

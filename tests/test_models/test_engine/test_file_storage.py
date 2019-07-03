@@ -27,7 +27,7 @@ class Test_FileStorage(unittest.TestCase):
 
     @classmethod
     def deleteClase(clase):
-        del clase.clase
+        del clase.usr
 
     def deleteClase(self):
         try:
@@ -40,6 +40,57 @@ class Test_FileStorage(unittest.TestCase):
         style = pep8.StyleGuide(quiet=True)
         p = style.check_files(['models/engine/file_storage.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
+
+    def test_All(self):
+        """ test all """
+        storage = file_storage.FileStorage()
+        instances_dic = storage.all()
+        self.assertIsNotNone(instances_dic)
+        self.assertEqual(type(instances_dic), dict)
+        self.assertIs(instances_dic, storage._FileStorage__objects)
+
+    def test_New(self):
+        """ test new """
+        nstorage = file_storage.FileStorage()
+        dic = nstorage.all()
+        rev = User()
+        rev.id = 1121
+        rev.name = "Alexander"
+        nstorage.new(rev)
+        key = rev.__class__.__name__ + "." + str(rev.id)
+        self.assertIsNotNone(dic[key])
+
+    def test_Reload(self):
+        """ test reload """
+        self.storage.save()
+        pthi = os.path.dirname(os.path.abspath("console.py"))
+        pti = os.path.join(pthi, "file.json")
+        with open(pti, 'r') as fi:
+            lines = fi.readlines()
+
+        try:
+            os.remove(pti)
+        except BaseException:
+            pass
+
+        self.storage.save()
+
+        with open(pti, 'r') as fi:
+            lines2 = fi.readlines()
+
+        self.assertEqual(lines, lines2)
+
+        try:
+            os.remove(pt)
+        except BaseException:
+            pass
+
+        with open(pti, "w") as fi:
+            fi.write("{}")
+        with open(pti, "r") as ri:
+            for line in ri:
+                self.assertEqual(line, "{}")
+        self.assertIs(self.storage.reload(), None)
 
 if __name__ == "__main__":
     unittest.main()

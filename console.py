@@ -26,6 +26,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, args):
         """ EOF command """
+        print()
         quit()
 
     def do_help(self, args):
@@ -136,6 +137,7 @@ class HBNBCommand(cmd.Cmd):
                         print("** value missing **")
                     elif argumento[2] not in notocar:
                         arg3 = argumento[3]
+                        print("arg3: %s" % arg3)
                         if arg3.isdigit():
                             arg3 = int(arg3)
                         elif arg3.replace('.', '', 1).isdigit():
@@ -186,11 +188,29 @@ class HBNBCommand(cmd.Cmd):
             elif tokens[1].split('(')[0] == 'update':
                 params = findall('\(([^)]+)', tokens[1])
                 args = tokens[0]
+                #### feature to update from dictionary
+                dicparams = tokens[1].split('{', 1)[1].split('}')[0]
+                dicparams = dicparams.replace(" ", "").replace("'", "")
+                dicparams = dicparams.replace('"', '')
+                listd = dicparams.split(',')
+                final_dic = {}
+                for i in listd:
+                    kval = i.split(':')
+                    value = kval[1]
+                    if value.isdigit():
+                        value = int(value)
+                    elif value.replace('.', '', 1).isdigit():
+                        value = float(value)
+                    final_dic[kval[0]] = value
+                print(final_dic)
+                print(type(final_dic))
+
+                ####
                 if params:
-                    newstr = sub(r'''["'{}:,]''', '', params[0])
+                    newstr = sub(r'''["',]''', '', params[0])
                     if newstr:
                         args = tokens[0] + " " + newstr
-                return self.do_update(args)
+                # return self.do_update(args)
         except IndexError:
             pass
 

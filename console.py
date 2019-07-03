@@ -167,7 +167,7 @@ class HBNBCommand(cmd.Cmd):
                     instancias.append(objetos[name])
             print(len(instancias))
 
-    def build_dict(self,id_key, dicparams):
+    def build_dict(self, dicparams):
         dicparams = dicparams.replace(" ", "").replace("'", "")
         dicparams = dicparams.replace('"', '')
         listd = dicparams.split(',')
@@ -180,9 +180,7 @@ class HBNBCommand(cmd.Cmd):
             elif value.replace('.', '', 1).isdigit():
                 value = float(value)
             final_dic[kval[0]] = value
-        final_dic['id'] = id_key
-        print(final_dic)
-        print(type(final_dic))
+        # final_dic['id'] = id_key
         return final_dic
 
     def default(self, inp):
@@ -211,8 +209,19 @@ class HBNBCommand(cmd.Cmd):
                 id_key = tokens[1].split('"', 1)[1].split('"')[0]
                 dicparams = tokens[1].split('{', 1)[1].split('}')[0]
                 if dicparams:
-                    print(id_key)
-                    return self.build_dict(id_key, dicparams)
+                    obj_dic = self.build_dict(dicparams)
+                    print(obj_dic)
+                    print(type(obj_dic))
+                    classes = self.up_clases
+                    objects = storage.all()
+                    if tokens[0] in classes:
+                        master_key = tokens[0]+"."+id_key
+                        if master_key in objects:
+                            obj = objects[master_key]
+                            for k, v in obj_dic.items():
+                                setattr(obj, k, v)
+                            obj.updated_at = datetime.now()
+                            storage.save()
                 ######
 
                 ####

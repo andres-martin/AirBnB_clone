@@ -50,6 +50,7 @@ class Test_BaseModel(unittest.TestCase):
         self.assertTrue(isinstance(self.bsm, BaseModel))
 
     def test_Save(self):
+        """ test save method """
         self.bsm.save()
         self.assertNotEqual(self.bsm.created_at, self.bsm.updated_at)
         gasparin = BaseModel()

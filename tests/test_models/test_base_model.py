@@ -11,12 +11,14 @@ class Test_BaseModel(unittest.TestCase):
 
     @classmethod
     def setUpClass(clase):
+        """ first setup """
         clase.bsm = BaseModel()
         clase.bsm.name = "Holberton"
         clase.bsm.my_num = 89
 
     @classmethod
     def deleteClase(clase):
+        """ final option """
         del clase.bsm
         try:
             os.remove("file.json")
@@ -29,17 +31,20 @@ class Test_BaseModel(unittest.TestCase):
         p = style.check_files(['models/base_model.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
 
-    def test_CheckFunctions(self):
-        self.assertIsNotNone(BaseModel.__doc__)
+    def test_Functions(self):
+        self.assertNotEqual(len(BaseModel.__doc__), 0)
+        self.assertIsNotNone(BaseModel.__init__.__doc__)
+        self.assertIsNotNone(BaseModel.__str__.__doc__)
         self.assertIsNotNone(BaseModel.save.__doc__)
         self.assertIsNotNone(BaseModel.to_dict.__doc__)
 
     def test_Attr(self):
-        self.assertTrue(hasattr(BaseModel, "__init__"))
-        self.assertTrue(hasattr(BaseModel, "save"))
-        self.assertTrue(hasattr(BaseModel, "to_dict"))
+        """ test basemodel attributes """
+        self.assertEqual(hasattr(self.bsm, "id"), True)
+        self.assertEqual(hasattr(self.bsm, "created_at"), True)
+        self.assertEqual(hasattr(self.bsm, "updated_at"), True)
 
-    def test_Init(self):
+    def test_init(self):
         self.assertTrue(isinstance(self.bsm, BaseModel))
 
     def test_Save(self):
@@ -48,10 +53,9 @@ class Test_BaseModel(unittest.TestCase):
 
     def test_ToDict(self):
         bsm_dict = self.bsm.to_dict()
-        self.assertEqual(self.bsm.__class__.__name__, 'BaseModel')
-        self.assertIsInstance(bsm_dict['created_at'], str)
-        self.assertIsInstance(bsm_dict['updated_at'], str)
-
+        self.assertTrue(bsm_dict.get("__class__"))
+        self.assertTrue(type(bsm_dict) is dict)
+        self.assertTrue("to_dict" in dir(self.bsm))
 
 if __name__ == "__main__":
     unittest.main()

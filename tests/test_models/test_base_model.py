@@ -51,7 +51,10 @@ class Test_BaseModel(unittest.TestCase):
 
     def test_Save(self):
         """ test save method """
+        self.first_update = self.bsm.updated_at
         self.bsm.save()
+        self.after_update = self.bsm.updated_at
+        self.assertNotEqual(self.first_update, self.after_update)
         self.assertNotEqual(self.bsm.created_at, self.bsm.updated_at)
         gasparin = BaseModel()
         new_id = gasparin.id

@@ -158,3 +158,10 @@ rd': '1234'}", "[User] (1121) {'id': 1121, 'created_at': datetime.datetime(2019,
 Alexander', 'updated_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 92588)}"]
 (hbnb) 
 ```
+
+Count Instances 
+```sh
+(hbnb) User.count()
+4
+(hbnb)
+```

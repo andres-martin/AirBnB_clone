@@ -7,6 +7,7 @@ import pep8
 from console import HBNBCommand
 from unittest.mock import create_autospec
 
+
 class TestConsole(unittest.TestCase):
     ''' testing console '''
 
@@ -56,4 +57,3 @@ class TestConsole(unittest.TestCase):
         ''' test quit command '''
         cli = self.create()
         self.assertTrue(cli.onecmd("quit"))
-

@@ -142,3 +142,19 @@ ca', 'created_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 224916), 'updated_at
 5, 28, 207670)}"]
 (hbnb) quit
 ```
+All instances by class name
+```sh
+(hbnb) user.all()
+** class doesn't exist **
+(hbnb) User.all()
+["[User] (7d734818-277e-4645-9e6a-41a6c3f61ff9) {'id': '7d734818-277e-4645-9e6a-41a6c3f61ff9', 'email': 'alexafdeve
+loper@gmail.com', 'created_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 91697), 'first_name': 'Jessica', 'updated_
+at': datetime.datetime(2019, 7, 3, 21, 5, 28, 91715), 'last_name': 'Sandoval'}", "[User] (1121) {'id': 1121, 'creat
+ed_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 92574), 'name': 'Alexander', 'updated_at': datetime.datetime(2019,
+ 7, 3, 21, 5, 28, 92588)}", "[User] (8669eea1-3bcd-470d-b4e4-6bce1cb5018b) {'id': '8669eea1-3bcd-470d-b4e4-6bce1cb5
+018b', 'email': 'alexafdeveloper@gmail.com', 'created_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 243808), 'first
+_name': 'Jessica', 'updated_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 244927), 'last_name': 'Sandoval', 'passwo
+rd': '1234'}", "[User] (1121) {'id': 1121, 'created_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 92574), 'name': '
+Alexander', 'updated_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 92588)}"]
+(hbnb) 
+```

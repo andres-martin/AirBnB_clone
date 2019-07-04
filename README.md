@@ -108,3 +108,37 @@ me.datetime(2019, 7, 4, 5, 1, 12, 957032)}", "[BaseModel] (cc464ded-3497-4294-a0
 28, 5850), 'updated_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 6399)}"]
 (hbnb) EOF
 ```
+Serialization and deserialization off all our classes:
+```sh
+(hbnb) show Place
+** instance id missing **
+(hbnb) all Place
+["[Place] (f212ab79-09ec-4cc1-a169-cd415860c156) {'id': 'f212ab79-09ec-4cc1-a169-cd415860c156', 'name': 'Hotel', 'c
+reated_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 183217), 'description': 'El mejor lugar', 'updated_at': dateti
+me.datetime(2019, 7, 3, 21, 5, 28, 184343)}"]
+(hbnb) create State
+1e30f8a7-f913-48ac-a646-6852a0444703
+(hbnb) show State 1e30f8a7-f913-48ac-a646-6852a0444703
+[State] (1e30f8a7-f913-48ac-a646-6852a0444703) {'id': '1e30f8a7-f913-48ac-a646-6852a0444703', 'created_at': datetim
+e.datetime(2019, 7, 4, 5, 6, 27, 761239), 'updated_at': datetime.datetime(2019, 7, 4, 5, 6, 27, 761274)}
+(hbnb) destroy State 1e30f8a7-f913-48ac-a646-6852a0444703
+(hbnb) show State 1e30f8a7-f913-48ac-a646-6852a0444703
+** no instance found **
+(hbnb) all State
+["[State] (bbea5815-2b25-44f3-b0ba-5d914891e6ca) {'id': 'bbea5815-2b25-44f3-b0ba-5d914891e6ca', 'name': 'Cundinamar
+ca', 'created_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 224916), 'updated_at': datetime.datetime(2019, 7, 3, 21
+, 5, 28, 226011)}"]
+(hbnb) all City
+["[City] (0771cf68-5d31-4a06-92bd-41b67284e0ea) {'state_id': 'CUND', 'id': '0771cf68-5d31-4a06-92bd-41b67284e0ea', 
+'name': 'Bogota', 'created_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 73820), 'updated_at': datetime.datetime(20
+19, 7, 3, 21, 5, 28, 74875)}"]
+(hbnb) all Amenity
+["[Amenity] (8b5a2bc3-fe61-4f30-a513-b9d3e6cc938d) {'id': '8b5a2bc3-fe61-4f30-a513-b9d3e6cc938d', 'name': 'Buena', 
+'created_at': datetime.datetime(2019, 7, 3, 21, 5, 27, 996111), 'updated_at': datetime.datetime(2019, 7, 3, 21, 5, 
+27, 996687)}"]
+(hbnb) all Review
+["[Review] (c6325148-4524-40a1-a817-49a022e109a5) {'text': 'Excelente', 'id': 'c6325148-4524-40a1-a817-49a022e109a5
+', 'created_at': datetime.datetime(2019, 7, 3, 21, 5, 28, 206530), 'updated_at': datetime.datetime(2019, 7, 3, 21, 
+5, 28, 207670)}"]
+(hbnb) quit
+```

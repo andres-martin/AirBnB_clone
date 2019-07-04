@@ -56,5 +56,4 @@ EOF  all  create  destroy  help  quit  show  update
 
 ## Examples
 
-https://drive.google.com/open?id=1AxidIjMan5hifWiXRZVwI4ssmnOM1wY8
-
+<p><img src="https://drive.google.com/open?id=1AxidIjMan5hifWiXRZVwI4ssmnOM1wY8" alt="Help & quit" width="629" height="335"></p>

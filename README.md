@@ -55,6 +55,7 @@ EOF  all  create  destroy  help  quit  show  update
 ```
 ## Commands
 |Name | Description |
+|:--: | :-- |
 | create | Creates a new instance |
 |show | Prints the string representation of an instance |
 | destroy | Deletes an instance |

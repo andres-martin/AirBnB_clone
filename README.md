@@ -53,6 +53,13 @@ EOF  all  create  destroy  help  quit  show  update
 
 (hbnb) 
 ```
+## Commands
+|Name | Description |
+| create | Creates a new instance |
+|show | Prints the string representation of an instance |
+| destroy | Deletes an instance |
+| all | Prints all string representation of all instances |
+|update | Updates an instance |
 
 ## Examples
 

@@ -1,0 +1,13 @@
+@import url("4-filters.css");
+
+/* amenities and location filters */
+div.locations,
+div.amenities {
+    height: 100%;
+    width: 25%;
+
+}
+
+div.locations {
+    border-right: 1px solid #DDDDDD;
+}

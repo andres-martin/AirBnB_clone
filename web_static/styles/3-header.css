@@ -2,8 +2,20 @@ header {
     color: #ffffff;
     height: 70px;
     width: 100%;
-    background-image: url("../images/logo.png");
     border-bottom: 1px solid #CCCCCC;
+
+}
+
+header div.container-header {
+    height: 5rem;
+    width: 200px;
+}
+
+header div.logo {
+    height: 5rem;
+    width: 200px;
+    margin-left: 20px;
+    background-image: url("../images/logo.png");
     background-repeat: no-repeat;
     background-position: left center;
 }

@@ -1,22 +1,26 @@
 @import url("8-places.css");
 
-section.places article div.amenities {
+section.places article div.amenities,
+section.places article div.reviews {
     margin-top: 40px;
     width: 100%;
 }
 
-section.places article div.amenities h2 {
+section.places article div.amenities h2,
+section.places article div.reviews h2 {
     font-size: 16px;
     border-bottom: 1px solid #DDD;
     text-align: left;
     padding-bottom: 10px;
 }
 
-section.places article div.amenities ul {
+section.places article div.amenities ul,
+section.places article div.reviews ul {
     list-style: none;
 }
 
-section.places article div.amenities ul li {
+section.places article div.amenities ul li,
+section.places article div.reviews ul li {
     margin-left: -30px;
 }
 
@@ -49,4 +53,12 @@ section.places article div.amenities ul li div.pets {
 section.places article div.amenities ul li p {
     display: inline-block;
     margin-bottom: 0;
+}
+
+section.places article div.reviews ul li h3 {
+    font-size: 14px;
+}
+
+section.places article div.reviews ul li p {
+    font-size: 12px;
 }

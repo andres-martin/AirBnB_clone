@@ -19,7 +19,7 @@ section.places article {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* position: relative; */
+    /* align-items: center; */
 }
 
 section.places article h2 {

@@ -39,6 +39,7 @@ div.locations,
 div.amenities {
     height: 100%;
     width: 25%;
+    position: relative;
 }
 
 div.locations {

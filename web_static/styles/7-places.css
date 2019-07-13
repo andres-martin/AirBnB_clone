@@ -19,12 +19,14 @@ section.places article {
     border-radius: 4px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
     /* align-items: center; */
+    flex-direction: column;
     position: relative;
 }
 
 section.places article h2 {
     font-size: 30px;
     margin: 0;
+    text-align: center;
 }

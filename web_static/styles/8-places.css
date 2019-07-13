@@ -43,4 +43,28 @@ section.places article div.information {
 
 section.places article div.information div {
     width: 100px;
+
+}
+
+section.places article div.information div.max_guest div.image {
+    background-image: url("../images/icon_group.png");
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+}
+
+section.places article div.information div.number_rooms div.image {
+    background-image: url("../images/icon_bed.png");
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    margin: 0 15px;
+}
+
+section.places article div.information div.number_bathrooms div.image {
+    background-image: url("../images/icon_bath.png");
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    margin: 0 15px;
 }

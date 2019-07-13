@@ -3,7 +3,6 @@ section.places {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: 1px solid red;
 }
 
 section.places h1 {

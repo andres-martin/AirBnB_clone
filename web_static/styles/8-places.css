@@ -3,7 +3,6 @@
 section.places article::before {
     content: "A";
     visibility: hidden;
-    /* margin: 1px auto 1px 1px; */
     margin-left: 25%;
 }
 
@@ -19,11 +18,18 @@ section.places article div.price_by_night {
     /* justify-content: center; */
     /* flex-direction: row; */
     align-items: center;
-    /* align-self: flex-end; */
     padding: 30px 5px;
 }
 
 section.places article div.price_by_night p {
-    margin: 0 auto;
+    margin: 0;
 
+}
+
+/* information*/
+section.places article div.information {
+    height: 80px;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    display: block;
 }

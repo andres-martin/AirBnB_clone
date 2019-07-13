@@ -1,10 +1,10 @@
 @import url("7-places.css");
 
-section.places article::before {
+/* section.places article::before {
     content: "A";
     visibility: hidden;
     margin-left: 25%;
-}
+} */
 
 section.places article div.price_by_night {
     color: #FF5A5F;
@@ -15,6 +15,9 @@ section.places article div.price_by_night {
     font-size: 30px;
     margin-left: auto;
     display: flex;
+    position: absolute;
+    top: 6%;
+    right: 3%;
     /* justify-content: center; */
     /* flex-direction: row; */
     align-items: center;
@@ -28,8 +31,16 @@ section.places article div.price_by_night p {
 
 /* information*/
 section.places article div.information {
+    margin-top: 3rem;
     height: 80px;
+    width: 100%;
     border-top: 1px solid #DDDDDD;
     border-bottom: 1px solid #DDDDDD;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section.places article div.information div {
+    width: 100px;
 }

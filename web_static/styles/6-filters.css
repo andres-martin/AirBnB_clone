@@ -80,7 +80,11 @@ div.amenities:hover ul.popover {
     list-style: none;
 }
 
-ul.inner-drop {
+ul.popover h2 {
+    margin: 0;
+}
+
+ul.inner-drop li {
     list-style: none;
     margin: 0px;
 }

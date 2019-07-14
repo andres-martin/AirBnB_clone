@@ -1,0 +1,21 @@
+header {
+    color: #ffffff;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+
+}
+
+header div.container-logo {
+    height: 100%;
+    width: 150px;
+}
+
+header div.logo {
+    height: 100%;
+    width: 100%;
+    margin-left: 20px;
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+}

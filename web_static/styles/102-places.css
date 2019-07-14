@@ -63,4 +63,8 @@ section.places article div.reviews ul li p {
     font-size: 12px;
 }
 
-@media(max-width: 768px) {}
+@media(max-width: 320px) {
+    section.places article {
+        width: 305px;
+    }
+}

@@ -22,3 +22,5 @@ div.container {
     min-height: 70vh;
     /* position: relative; */
 }
+
+@media(max-width: 768px) {}

@@ -7,9 +7,7 @@ section.filters {
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     display: flex;
-    /*grid-template-columns: 25% 25% auto 20%;*/
     align-items: center;
-
 }
 
 section.filters div.empty {
@@ -17,8 +15,6 @@ section.filters div.empty {
 }
 
 section.filters button {
-    /*grid-column: 4;*/
-    /*justify-self: end;*/
     font-size: 18px;
     background-color: #FF5A5F;
     color: #FFFFFF;
@@ -103,4 +99,56 @@ ul.inner-drop {
 ul.inner-drop li {
     list-style: none;
     margin: 0.7rem;
+}
+
+/* media queries */
+@media(max-width: 768px) {
+    div.container {
+        width: 100%;
+    }
+
+    section.row {
+        height: 100%;
+        width: 100%;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin-bottom: 50px;
+    }
+
+    section.row .column {
+        flex: 100%;
+        padding: 20px;
+    }
+
+    section.filters div.empty {
+        display: none;
+    }
+
+    div.column h3 {
+        /* font-weight: 600; */
+        /* text-align: center; */
+        margin: 0;
+        font-size: 25px;
+        /* margin-top: 0.6rem; */
+        /* margin-bottom: 2%; */
+    }
+
+    div.column h4 {
+        display: none;
+    }
+
+    section.row .column {
+        border: 1px solid #DDDDDD;
+    }
+
+    section.filters button {
+        margin: 0;
+        font-size: 25px;
+        padding: 0px;
+        height: 65px;
+    }
+
+
+
+
 }

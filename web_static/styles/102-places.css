@@ -62,3 +62,5 @@ section.places article div.reviews ul li h3 {
 section.places article div.reviews ul li p {
     font-size: 12px;
 }
+
+@media(max-width: 768px) {}
